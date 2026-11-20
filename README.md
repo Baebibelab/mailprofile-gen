@@ -36,7 +36,7 @@ config.yaml  ──►  mailprofile-gen  ──►  comptes.mobileconfig  ──
 
 ## Installation
 
-Python 3.9 ou plus récent.
+Python 3.10 ou plus récent.
 
 ```bash
 git clone https://github.com/baebibelab/mailprofile-gen.git
