@@ -1,0 +1,21 @@
+# Configuration réelle et profils générés : contiennent des mots de passe
+config.yaml
+config.*.yaml
+!config.example.yaml
+*.mobileconfig
+
+# Certificats et clés de signature
+*.p12
+*.pfx
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
