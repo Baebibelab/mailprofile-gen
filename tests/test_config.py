@@ -169,4 +169,4 @@ def test_example_config_is_valid():
 
     config = load_config(Path(__file__).resolve().parent.parent / "config.example.yaml")
     assert len(config.accounts) == 3
-    assert config.profile.identifier == "com.romain.mailprofile"
+    assert config.profile.identifier == "com.exemple.mailprofile"

@@ -11,11 +11,11 @@
 profile:
   # Nom affiché dans Réglages > Général > VPN et gestion de l'appareil
   name: "Comptes mail"
-  organization: "Romain"
+  organization: "Exemple"
   # Identifiant de base, en notation DNS inversée. NE LE CHANGEZ PLUS ensuite :
   # c'est lui qui permet à une réinstallation de remplacer le profil existant
   # (et ses comptes) au lieu d'en ajouter un second.
-  identifier: "com.romain.mailprofile"
+  identifier: "com.exemple.mailprofile"
   # Facultatif : par défaut, la liste des adresses configurées.
   # description: "Mes comptes mail"
 
@@ -52,21 +52,21 @@ providers:
 # ---------------------------------------------------------------------------
 accounts:
   # Cas le plus simple : fournisseur par défaut, identifiant = adresse.
-  - name: "Romain"                 # nom affiché comme expéditeur
+  - name: "Camille Martin"         # nom affiché comme expéditeur
     email: contact@exemple.fr
     password: "mot-de-passe-1"     # toujours entre guillemets
     description: "Contact"         # facultatif : libellé du compte dans Mail
                                    # (défaut : l'adresse email)
 
-  - name: "Romain - Facturation"
+  - name: "Facturation"
     email: factures@exemple.fr
     password: "mot-de-passe-2"
     provider: ovh                  # facultatif : explicite ici
 
   # Identifiant différent de l'adresse et surcharge de paramètres serveur.
-  - name: "Romain"
-    email: romain@autre-domaine.fr
-    username: romain@autre-domaine.fr   # facultatif, défaut : l'adresse
+  - name: "Camille Martin"
+    email: camille@autre-domaine.fr
+    username: camille@autre-domaine.fr   # facultatif, défaut : l'adresse
     password: "mot-de-passe-3"
     imap:
       host: imap.autre-domaine.fr  # n'importe quel paramètre du fournisseur
@@ -77,5 +77,5 @@ accounts:
       # séparément pour imap et smtp (ex. mot de passe SMTP différent).
 
   # Compte sans mot de passe : l'iPhone / le Mac le demandera à l'installation.
-  # - name: "Romain"
+  # - name: "Camille Martin"
   #   email: perso@exemple.fr

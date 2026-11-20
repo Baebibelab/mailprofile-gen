@@ -96,8 +96,8 @@ supprimez le fichier.
 ```yaml
 profile:
   name: "Comptes mail"              # nom du profil affiché sur l'appareil
-  organization: "Romain"            # facultatif
-  identifier: "com.romain.mailprofile"   # obligatoire, ne plus le changer
+  organization: "Exemple"           # facultatif
+  identifier: "com.exemple.mailprofile"   # obligatoire, ne plus le changer
   # description: "Mes comptes mail"      # facultatif
 
 default_provider: ovh               # fournisseur des comptes sans « provider »
@@ -111,19 +111,19 @@ providers:
     smtp: { host: smtp.exemple.net, port: 587, ssl: true }
 
 accounts:
-  - name: "Romain"                  # nom d'expéditeur
+  - name: "Camille Martin"          # nom d'expéditeur
     email: contact@exemple.fr
     password: "mot-de-passe-1"
     description: "Contact"          # libellé du compte dans Mail
 
-  - name: "Romain - Facturation"
+  - name: "Facturation"
     email: factures@exemple.fr
     password: "mot-de-passe-2"
 
-  - name: "Romain"
-    email: romain@autre-domaine.fr
+  - name: "Camille Martin"
+    email: camille@autre-domaine.fr
     provider: autre
-    username: "romain"              # si l'identifiant n'est pas l'adresse
+    username: "camille"             # si l'identifiant n'est pas l'adresse
     password: "mot-de-passe-3"
     smtp:
       port: 465                     # surcharge pour ce compte uniquement
@@ -133,7 +133,7 @@ accounts:
 
 | Clé            | Obligatoire | Description |
 |----------------|-------------|-------------|
-| `identifier`   | oui         | Identifiant de base en notation DNS inversée (ex. `com.romain.mailprofile`). Il sert de `PayloadIdentifier` au profil et à dériver les identifiants des comptes. **Gardez-le identique** d'une génération à l'autre : c'est ce qui permet à une réinstallation de *remplacer* le profil au lieu d'en ajouter un second. |
+| `identifier`   | oui         | Identifiant de base en notation DNS inversée (ex. `com.exemple.mailprofile`). Il sert de `PayloadIdentifier` au profil et à dériver les identifiants des comptes. **Gardez-le identique** d'une génération à l'autre : c'est ce qui permet à une réinstallation de *remplacer* le profil au lieu d'en ajouter un second. |
 | `name`         | non         | Nom du profil affiché sur l'appareil (défaut : « Comptes mail »). |
 | `organization` | non         | Organisation affichée sous le nom du profil. |
 | `description`  | non         | Description du profil (défaut : la liste des adresses). |
@@ -178,7 +178,7 @@ indépendant dans Mail.
 
 | Clé           | Obligatoire | Description |
 |---------------|-------------|-------------|
-| `name`        | oui         | Nom affiché comme expéditeur (« De : Romain »). |
+| `name`        | oui         | Nom affiché comme expéditeur (« De : Camille Martin »). |
 | `email`       | oui         | Adresse e-mail. Doit être unique dans le fichier (casse ignorée). |
 | `password`    | non\*       | Mot de passe, utilisé pour IMAP et SMTP. |
 | `username`    | non         | Identifiant de connexion (défaut : l'adresse). |
@@ -236,7 +236,7 @@ Ce que fait l'outil :
 - des **identifiants stables** : le `PayloadUUID` de chaque compte est un
   UUID v5 dérivé de l'adresse e-mail (et de `profile.identifier`), son
   `PayloadIdentifier` est lisible et lui aussi dérivé de l'adresse, par exemple
-  `com.romain.mailprofile.mail.contact.at.exemple.fr`. Régénérer le profil
+  `com.exemple.mailprofile.mail.contact.at.exemple.fr`. Régénérer le profil
   donne donc les mêmes identifiants, quel que soit l'ordre des comptes ;
 - le plist est produit avec `plistlib`, puis **validé** (clés obligatoires,
   types, unicité des UUID et identifiants, relecture) ; sur macOS, il est en
