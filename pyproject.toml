@@ -7,7 +7,7 @@ name = "mailprofile-gen"
 version = "0.1.0"
 description = "Génère un profil Apple .mobileconfig avec plusieurs comptes mail IMAP à partir d'un fichier YAML"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["PyYAML>=5.4"]
 
 [project.optional-dependencies]

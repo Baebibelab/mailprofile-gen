@@ -266,7 +266,7 @@ class _Validator:
         if "identifier" not in block:
             self.error(
                 "profile.identifier",
-                "obligatoire (ex. com.romain.mailprofile) ; il doit rester identique "
+                "obligatoire (ex. com.exemple.mailprofile) ; il doit rester identique "
                 "d'une génération à l'autre pour que le profil soit remplacé et non dupliqué",
             )
         else:
@@ -275,7 +275,7 @@ class _Validator:
                 self.error(
                     "profile.identifier",
                     f"identifiant invalide {identifier!r} ; format attendu en notation DNS inversée, "
-                    "lettres, chiffres et tirets séparés par des points (ex. com.romain.mailprofile)",
+                    "lettres, chiffres et tirets séparés par des points (ex. com.exemple.mailprofile)",
                 )
                 identifier = None
         organization = None

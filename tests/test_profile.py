@@ -18,8 +18,8 @@ from mailprofile_gen.profile import (
 def test_one_mail_payload_per_account(base_config):
     profile = build_profile(validate_config(base_config))
     assert profile["PayloadType"] == "Configuration"
-    assert profile["PayloadIdentifier"] == "com.romain.mailprofile"
-    assert profile["PayloadOrganization"] == "Romain"
+    assert profile["PayloadIdentifier"] == "com.exemple.mailprofile"
+    assert profile["PayloadOrganization"] == "Exemple"
     assert profile["PayloadDisplayName"] == "Comptes mail"
     content = profile["PayloadContent"]
     assert [p["PayloadType"] for p in content] == ["com.apple.mail.managed"] * 2
@@ -29,7 +29,7 @@ def test_one_mail_payload_per_account(base_config):
 def test_mail_payload_contents(base_config):
     p = build_profile(validate_config(base_config))["PayloadContent"][0]
     assert p["EmailAccountType"] == "EmailTypeIMAP"
-    assert p["EmailAccountName"] == "Romain"
+    assert p["EmailAccountName"] == "Camille Martin"
     assert p["EmailAccountDescription"] == "contact@exemple.fr"
     assert p["IncomingMailServerHostName"] == "ssl0.ovh.net"
     assert p["IncomingMailServerPortNumber"] == 993
@@ -71,11 +71,11 @@ def test_uuids_are_stable_and_derived_from_address(base_config):
         assert ids2[email] == ids
 
     meta = validate_config(base_config).profile
-    expected = uuid.uuid5(uuid.uuid5(uuid.NAMESPACE_DNS, "com.romain.mailprofile"), "mail:contact@exemple.fr")
+    expected = uuid.uuid5(uuid.uuid5(uuid.NAMESPACE_DNS, "com.exemple.mailprofile"), "mail:contact@exemple.fr")
     assert account_uuid(meta, "contact@exemple.fr") == str(expected).upper()
     assert account_uuid(meta, "Contact@Exemple.FR") == account_uuid(meta, "contact@exemple.fr")
-    assert account_identifier(meta, "contact@exemple.fr") == "com.romain.mailprofile.mail.contact.at.exemple.fr"
-    assert account_identifier(meta, "a+b_c@x.fr") == "com.romain.mailprofile.mail.a-b-c.at.x.fr"
+    assert account_identifier(meta, "contact@exemple.fr") == "com.exemple.mailprofile.mail.contact.at.exemple.fr"
+    assert account_identifier(meta, "a+b_c@x.fr") == "com.exemple.mailprofile.mail.a-b-c.at.x.fr"
 
 
 def test_uuids_depend_on_profile_identifier(base_config):
