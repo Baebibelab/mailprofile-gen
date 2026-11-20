@@ -1,0 +1,81 @@
+# Exemple de configuration pour mailprofile-gen.
+#
+#   cp config.example.yaml config.yaml
+#   chmod 600 config.yaml
+#
+# config.yaml est ignoré par git : il contient vos mots de passe.
+
+# ---------------------------------------------------------------------------
+# Métadonnées du profil
+# ---------------------------------------------------------------------------
+profile:
+  # Nom affiché dans Réglages > Général > VPN et gestion de l'appareil
+  name: "Comptes mail"
+  organization: "Romain"
+  # Identifiant de base, en notation DNS inversée. NE LE CHANGEZ PLUS ensuite :
+  # c'est lui qui permet à une réinstallation de remplacer le profil existant
+  # (et ses comptes) au lieu d'en ajouter un second.
+  identifier: "com.romain.mailprofile"
+  # Facultatif : par défaut, la liste des adresses configurées.
+  # description: "Mes comptes mail"
+
+# ---------------------------------------------------------------------------
+# Fournisseurs : réglages serveur réutilisables
+# ---------------------------------------------------------------------------
+# Fournisseur utilisé par les comptes qui n'indiquent pas « provider ».
+default_provider: ovh
+
+providers:
+  # « ovh » est intégré à l'outil : ce bloc est facultatif, il est repris ici
+  # pour l'exemple. OVHcloud MX Plan (e-mails mutualisés) :
+  # IMAP ssl0.ovh.net:993 SSL/TLS, SMTP ssl0.ovh.net:465 SSL/TLS.
+  ovh:
+    imap:
+      host: ssl0.ovh.net
+      port: 993
+      ssl: true
+    smtp:
+      host: ssl0.ovh.net
+      port: 465
+      ssl: true
+
+  # Un autre fournisseur, au besoin :
+  # autre:
+  #   imap: { host: imap.exemple.net, port: 993, ssl: true }
+  #   smtp: { host: smtp.exemple.net, port: 587, ssl: true }
+  #   # Clés possibles par serveur : host, port, ssl, auth
+  #   # (auth : password [défaut], crammd5, ntlm, httpmd5, none)
+  #   # et pour imap uniquement : path_prefix (ex. "INBOX")
+
+# ---------------------------------------------------------------------------
+# Comptes : un compte séparé par entrée dans l'app Mail
+# ---------------------------------------------------------------------------
+accounts:
+  # Cas le plus simple : fournisseur par défaut, identifiant = adresse.
+  - name: "Romain"                 # nom affiché comme expéditeur
+    email: contact@exemple.fr
+    password: "mot-de-passe-1"     # toujours entre guillemets
+    description: "Contact"         # facultatif : libellé du compte dans Mail
+                                   # (défaut : l'adresse email)
+
+  - name: "Romain - Facturation"
+    email: factures@exemple.fr
+    password: "mot-de-passe-2"
+    provider: ovh                  # facultatif : explicite ici
+
+  # Identifiant différent de l'adresse et surcharge de paramètres serveur.
+  - name: "Romain"
+    email: romain@autre-domaine.fr
+    username: romain@autre-domaine.fr   # facultatif, défaut : l'adresse
+    password: "mot-de-passe-3"
+    imap:
+      host: imap.autre-domaine.fr  # n'importe quel paramètre du fournisseur
+    smtp:
+      host: smtp.autre-domaine.fr
+      port: 587
+      # host, port, ssl, auth, username, password sont surchargeables,
+      # séparément pour imap et smtp (ex. mot de passe SMTP différent).
+
+  # Compte sans mot de passe : l'iPhone / le Mac le demandera à l'installation.
+  # - name: "Romain"
+  #   email: perso@exemple.fr

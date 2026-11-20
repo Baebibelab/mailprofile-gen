@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mailprofile-gen"
+version = "0.1.0"
+description = "Génère un profil Apple .mobileconfig avec plusieurs comptes mail IMAP à partir d'un fichier YAML"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["PyYAML>=5.4"]
+
+[project.optional-dependencies]
+sign = ["cryptography>=41"]
+dev = ["pytest>=7", "cryptography>=41"]
+
+[project.scripts]
+mailprofile-gen = "mailprofile_gen.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
